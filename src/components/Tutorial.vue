@@ -4,46 +4,36 @@
     <form>
       <div class="form-group">
         <label for="title">Title</label>
-        <input type="text" class="form-control" id="title"
-          v-model="currentTutorial.title"
-        />
+        <input type="text" class="form-control" id="title" v-model="currentTutorial.title" />
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <input type="text" class="form-control" id="description"
+        <input
+          type="text"
+          class="form-control"
+          id="description"
           v-model="currentTutorial.description"
         />
       </div>
 
       <div class="form-group">
-        <label><strong>Status:</strong></label>
+        <label>
+          <strong>Status:</strong>
+        </label>
         {{ currentTutorial.published ? "Published" : "Pending" }}
       </div>
     </form>
 
-    <button class="badge badge-primary mr-2"
+    <button
+      class="badge badge-primary mr-2"
       v-if="currentTutorial.published"
       @click="updatePublished(false)"
-    >
-      UnPublish
-    </button>
-    <button v-else class="badge badge-primary mr-2"
-      @click="updatePublished(true)"
-    >
-      Publish
-    </button>
+    >UnPublish</button>
+    <button v-else class="badge badge-primary mr-2" @click="updatePublished(true)">Publish</button>
 
-    <button class="badge badge-danger mr-2"
-      @click="deleteTutorial"
-    >
-      Delete
-    </button>
+    <button class="badge badge-danger mr-2" @click="deleteTutorial">Delete</button>
 
-    <button type="submit" class="badge badge-success"
-      @click="updateTutorial"
-    >
-      Update
-    </button>
+    <button type="submit" class="badge badge-success" @click="updateTutorial">Update</button>
     <p>{{ message }}</p>
   </div>
 
@@ -54,14 +44,14 @@
 </template>
 
 <script>
-import TutorialDataService from "../services/TutorialDataService";
+import TutorialDataService from "@/services/TutorialDataService";
 
 export default {
   name: "tutorial",
   data() {
     return {
       currentTutorial: null,
-      message: ''
+      message: ""
     };
   },
   methods: {
@@ -98,7 +88,7 @@ export default {
       TutorialDataService.update(this.currentTutorial.id, this.currentTutorial)
         .then(response => {
           console.log(response.data);
-          this.message = 'The tutorial was updated successfully!';
+          this.message = "The tutorial was updated successfully!";
         })
         .catch(e => {
           console.log(e);
@@ -117,7 +107,7 @@ export default {
     }
   },
   mounted() {
-    this.message = '';
+    this.message = "";
     this.getTutorial(this.$route.params.id);
   }
 };

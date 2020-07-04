@@ -2,52 +2,49 @@
   <div class="list row">
     <div class="col-md-8">
       <div class="input-group mb-3">
-        <input type="text" class="form-control" placeholder="Search by title"
-          v-model="title"/>
+        <input type="text" class="form-control" placeholder="Search by title" v-model="title" />
         <div class="input-group-append">
-          <button class="btn btn-outline-secondary" type="button"
-            @click="searchTitle"
-          >
-            Search
-          </button>
+          <button class="btn btn-outline-secondary" type="button" @click="searchTitle">Search</button>
         </div>
       </div>
     </div>
     <div class="col-md-6">
       <h4>Tutorials List</h4>
       <ul class="list-group">
-        <li class="list-group-item"
+        <li
+          class="list-group-item"
           :class="{ active: index == currentIndex }"
           v-for="(tutorial, index) in tutorials"
           :key="index"
           @click="setActiveTutorial(tutorial, index)"
-        >
-          {{ tutorial.title }}
-        </li>
+        >{{ tutorial.title }}</li>
       </ul>
 
-      <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorials">
-        Remove All
-      </button>
+      <button class="m-3 btn btn-sm btn-danger" @click="removeAllTutorials">Remove All</button>
     </div>
     <div class="col-md-6">
       <div v-if="currentTutorial">
         <h4>Tutorial</h4>
         <div>
-          <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+          <label>
+            <strong>Title:</strong>
+          </label>
+          {{ currentTutorial.title }}
         </div>
         <div>
-          <label><strong>Description:</strong></label> {{ currentTutorial.description }}
+          <label>
+            <strong>Description:</strong>
+          </label>
+          {{ currentTutorial.description }}
         </div>
         <div>
-          <label><strong>Status:</strong></label> {{ currentTutorial.published ? "Published" : "Pending" }}
+          <label>
+            <strong>Status:</strong>
+          </label>
+          {{ currentTutorial.published ? "Published" : "Pending" }}
         </div>
 
-        <a class="badge badge-warning"
-          :href="'/tutorials/' + currentTutorial.id"
-        >
-          Edit
-        </a>
+        <a class="badge badge-warning" :href="'/tutorials/' + currentTutorial.id">Edit</a>
       </div>
       <div v-else>
         <br />
@@ -58,7 +55,7 @@
 </template>
 
 <script>
-import TutorialDataService from "../services/TutorialDataService";
+import TutorialDataService from "@/services/TutorialDataService";
 
 export default {
   name: "tutorials-list",
@@ -103,7 +100,7 @@ export default {
           console.log(e);
         });
     },
-    
+
     searchTitle() {
       TutorialDataService.findByTitle(this.title)
         .then(response => {

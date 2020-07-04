@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import TutorialDataService from "../services/TutorialDataService";
+import TutorialDataService from "@/services/TutorialDataService";
 
 export default {
   name: "add-tutorial",
@@ -67,7 +67,7 @@ export default {
           console.log(e);
         });
     },
-    
+
     newTutorial() {
       this.submitted = false;
       this.tutorial = {};
